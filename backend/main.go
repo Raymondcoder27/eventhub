@@ -19,7 +19,7 @@ func main() {
 	r.POST("/createEvent", controllers.CreateEvent)
 	r.GET("/events", controllers.EventsIndex)
 	// r.PUT("/events", controllers.UpdateEvent)
-	// r.DELETE("/event/:id", controllers.DeleteEvent)
+	r.DELETE("/event/:id", controllers.DeleteEvent)
 	fmt.Println("Hello World")
 	r.Run()
 }

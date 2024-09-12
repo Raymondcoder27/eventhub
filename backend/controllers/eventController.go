@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/eventhub/initializers"
@@ -37,8 +38,12 @@ func UpdateEvent(c *gin.Context) {
 }
 
 // delete event
-func DeleteEvent(c *gin.Context) {
+func DeleteEvent(c *gin.Context) error {
 	var event models.Event
+
+	if err := initializers.DB.Where("id = ?").First(&event).Error; err != nil {
+		return errors.New("Event not found")
+	}
 	if err := initializers.DB.Delete(&event).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"messge": "Failed to delete event from database"})
 	}

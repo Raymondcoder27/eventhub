@@ -30,3 +30,13 @@ func CreateEvent(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"code": 200})
 }
+
+// update event
+func UpdateEvent(c *gin.Context) {
+
+}
+
+// delete event
+func DeleteEvent(c *gin.Context) {
+
+}

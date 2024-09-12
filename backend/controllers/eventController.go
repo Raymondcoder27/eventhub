@@ -18,27 +18,19 @@ func EventsIndex(c *gin.Context) {
 // creating an event
 func CreateEvent(c *gin.Context) {
 	var eventRequest struct {
-		Name string
-		Description string
-		Location string
-		Date   time.Time
-		Category string
+		Name         string
+		Description  string
+		Location     string
+		Date         time.Time
+		Category     string
 		MaxAttendees string
 	}
 	c.Bind(&eventRequest)
 
-	err := initializers.DB.Create(&eventRequest{
-		Name:         eventRequest.Name,
-		Description:  eventRequest.Description,
-		Location:     eventRequest.Description,
-		Date:         eventRequest.Date,
-		Category:     eventRequest.Category,
-		MaxAttendees: eventRequest.MaxAttendees,
-		CreatedAt:    time.Now(),
-	}).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Error saving document metadata in database: " + err.Error()})
+	if err := initializers.DB.Create(&eventRequest).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Error saving event into database."})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"code": 200})
+	c.JSON(http.StatusOK, gin.H{"code": 200, "timestamp": eventRequest.Date})
 }

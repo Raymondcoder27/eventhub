@@ -1,11 +1,16 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+
+	"github.com/eventhub/initializers"
+	"github.com/gin-gonic/gin"
+)
 
 func init() {
 	initializers.LoadEnvVars()
 	initializers.ConnectToDB()
-	initializers.SyncDB()
+	initializers.MigrateDB()
 }
 
 func main() {
@@ -14,5 +19,6 @@ func main() {
 	r.GET("/events", controllers.EventsIndex)
 	r.PUT("/events", controllers.UpdateEvent)
 	r.DELETE("/event/:id", controllers.DeleteEvent)
+	fmt.Println("Hello World")
 	r.Run()
 }

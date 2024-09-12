@@ -46,5 +46,7 @@ func DeleteEvent(c *gin.Context) error {
 	}
 	if err := initializers.DB.Delete(&event).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"messge": "Failed to delete event from database"})
+		return nil
 	}
+	c.JSON(http.StatusOK, gin.H{"code": 200})
 }

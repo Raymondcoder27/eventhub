@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/eventhub/initializers"
 	"github.com/eventhub/models"
@@ -27,8 +28,8 @@ func CreateEvent(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Error saving event into database."})
 		return
 	}
-
-	c.JSON(http.StatusOK, gin.H{"code": 200})
+	currentTime := time.Now()
+	c.JSON(http.StatusOK, gin.H{"code": 200, "timestamp": currentTime})
 }
 
 // update event
@@ -51,9 +52,18 @@ func UpdateEvent(c *gin.Context) {
 	initializers.DB.First(&event, id)
 
 	//update it
-	initializers.DB.Model(&event).Updates()
+	initializers.DB.Model(&event).Updates(models.Event{
+		Name:         body.Name,
+		Description:  body.Description,
+		Location:     body.Location,
+		Date:         body.Date,
+		Category:     body.Category,
+		MaxAttendees: body.MaxAttendees,
+	})
 
+	currentTime := time.Now()
 	//respond with it
+	c.JSON(http.StatusOK, gin.H{"code": 200, "data": event, "timestamp": currentTime})
 }
 
 // delete event
@@ -65,5 +75,6 @@ func DeleteEvent(c *gin.Context) {
 	// 	c.JSON(http.StatusInternalServerError, gin.H{"messge": "Failed to delete event from database"})
 	// 	return
 	// }
-	c.JSON(http.StatusOK, gin.H{"code": 200})
+	currentTime := time.Now()
+	c.JSON(http.StatusOK, gin.H{"code": 200, "timestamp": currentTime})
 }

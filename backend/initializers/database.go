@@ -6,5 +6,5 @@ var DB *gorm.DB
 
 func ConnectToDB() {
 	var err error
-
+	dsn := 
 }

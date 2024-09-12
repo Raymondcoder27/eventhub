@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/eventhub/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -24,5 +25,14 @@ func ConnectToDB() {
 	}
 
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		log.Printf("Failed to connect to database: %v", err)
+	}
+}
 
+func MigrateDB() {
+	err := DB.AutoMigrate(&models.Event{})
+	if err != nil {
+		log.Printf("Error migrating database: %v", err)
+	}
 }

@@ -16,14 +16,7 @@ func EventsIndex(c *gin.Context) {
 
 // creating an event
 func CreateEvent(c *gin.Context) {
-	var eventRequest struct {
-		Name        string
-		Description string
-		Location    string
-		// Date         time.
-		Category     string
-		MaxAttendees string
-	}
+	var eventRequest models.Event
 	c.Bind(&eventRequest)
 
 	if err := initializers.DB.Create(&eventRequest).Error; err != nil {

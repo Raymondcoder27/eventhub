@@ -11,6 +11,10 @@ import (
 // getting all events
 func EventsIndex(c *gin.Context) {
 	var events []models.Event
+	if err := initializers.DB.Find(&events).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Error fetching events."})
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{"message": events})
 }
 

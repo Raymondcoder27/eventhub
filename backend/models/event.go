@@ -1,13 +1,17 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Event struct {
-	ID           string    `json:"id"`
+	gorm.Model
 	Name         string    `json:"name"`
 	Description  string    `json:"description"`
 	Location     string    `json:"location"`
-	Date         time.Time `json:"date"`
+	Date         string    `json:"date"`
 	Category     string    `json:"category"`
 	MaxAttendees string    `json:"maxAttendees"`
 	CreatedAt    time.Time `json:"createdAt"`

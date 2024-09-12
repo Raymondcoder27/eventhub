@@ -33,7 +33,27 @@ func CreateEvent(c *gin.Context) {
 
 // update event
 func UpdateEvent(c *gin.Context) {
+	//get the id off the url
+	id := c.Param("id")
+	//get the data off the req body
+	var body struct {
+		Name         string `json:"name"`
+		Description  string `json:"description"`
+		Location     string `json:"location"`
+		Date         string `json:"date"`
+		Category     string `json:"category"`
+		MaxAttendees string `json:"maxAttendees"`
+	}
+	c.Bind(&body)
 
+	//find the event you are updating
+	var event models.Event
+	initializers.DB.First(&event, id)
+
+	//update it
+	initializers.DB.Model(&event).Updates()
+
+	//respond with it
 }
 
 // delete event

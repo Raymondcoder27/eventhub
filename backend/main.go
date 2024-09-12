@@ -1,5 +1,7 @@
 package main
 
+import "github.com/gin-gonic/gin"
+
 func init() {
 	initializers.LoadEnvVars()
 	initializers.ConnectToDB()
@@ -8,4 +10,9 @@ func init() {
 
 func main() {
 	r := gin.Default()
+	r.POST()
+	r.GET()
+	r.PUT()
+	r.DELETE()
+	r.Run()
 }

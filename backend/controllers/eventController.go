@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"net/http"
-	"time"
 
 	"github.com/eventhub/initializers"
 	"github.com/eventhub/models"
@@ -18,10 +17,10 @@ func EventsIndex(c *gin.Context) {
 // creating an event
 func CreateEvent(c *gin.Context) {
 	var eventRequest struct {
-		Name         string
-		Description  string
-		Location     string
-		Date         time.Time
+		Name        string
+		Description string
+		Location    string
+		// Date         time.
 		Category     string
 		MaxAttendees string
 	}
@@ -32,5 +31,5 @@ func CreateEvent(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"code": 200, "timestamp": eventRequest.Date})
+	c.JSON(http.StatusOK, gin.H{"code": 200})
 }

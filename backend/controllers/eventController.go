@@ -40,10 +40,7 @@ func UpdateEvent(c *gin.Context) {
 func DeleteEvent(c *gin.Context) {
 	id := c.Param("id")
 
-	if err := initializers.DB.Delete(models.Event{}, id).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Event not found."})
-		return
-	}
+	initializers.DB.Delete(&models.Event{}, id)
 	// if err := initializers.DB.Delete(&event).Error; err != nil {
 	// 	c.JSON(http.StatusInternalServerError, gin.H{"messge": "Failed to delete event from database"})
 	// 	return

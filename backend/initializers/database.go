@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -21,5 +22,7 @@ func ConnectToDB() {
 	if dsn == "" {
 		log.Printf("DATABASE_URL not set.")
 	}
+
+	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 }

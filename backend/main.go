@@ -10,9 +10,9 @@ func init() {
 
 func main() {
 	r := gin.Default()
-	r.POST()
-	r.GET()
-	r.PUT()
-	r.DELETE()
+	r.POST("/createEvent", controllers.CreateEvent)
+	r.GET("/events", controllers.EventsIndex)
+	r.PUT("/events", controllers.UpdateEvent)
+	r.DELETE("/event/:id", controllers.DeleteEvent)
 	r.Run()
 }

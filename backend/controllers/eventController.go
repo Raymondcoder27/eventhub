@@ -21,12 +21,12 @@ func CreateEvent(c *gin.Context) {
 	c.Bind(&eventRequest)
 
 	initializers.DB.Create(models.Event{
-		Name:        eventRequest.Name,
-		Description: eventRequest.Description,
-		Location:    eventRequest.Description,
-		Date:        eventReuest.Date,
-		Category: eventRequest.Category,
+		Name:         eventRequest.Name,
+		Description:  eventRequest.Description,
+		Location:     eventRequest.Description,
+		Date:         eventRequest.Date,
+		Category:     eventRequest.Category,
 		MaxAttendees: eventRequest.MaxAttendees,
-		CreatedAt:    ,
+		CreatedAt:    time.Now(),
 	})
 }

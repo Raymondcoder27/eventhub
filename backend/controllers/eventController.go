@@ -32,7 +32,7 @@ func CreateEvent(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"code": 200, "timestamp": currentTime})
 }
 
-// update event
+// updating an event
 func UpdateEvent(c *gin.Context) {
 	//get the id off the url
 	id := c.Param("id")
